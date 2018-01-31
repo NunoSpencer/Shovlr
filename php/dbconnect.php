@@ -1,5 +1,6 @@
   /*
       php code to connect to the database...
+      this file is included on "submitquery.php" so querying requests can be processed to database
   */
   
   
