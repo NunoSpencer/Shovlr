@@ -21,6 +21,20 @@
 <body>
   <script src="js/scripts.js"></script>
 
+  <?php
+      $con = mysql_connect("localhost", "root", "");
+      $db = mysql_select_db("shovlrdb");
+
+      if($con)
+      {
+        echo("Connection sucessfully!");        
+      }else
+      {
+        die("Error connecting to Database!");
+      }
+
+  ?>
+
   <div class="main-title-bar">
     <h1 id="headertitle" class=""><strong>Shovlr - Snow Removal Service in RI</strong></h1>
     
