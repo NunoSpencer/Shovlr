@@ -42,4 +42,9 @@
         
         $submitQuery = mysqli_query($db_connection, "INSERT INTO requests VALUES ('$RequesterLName', '$RequesterFName', '$RequesterPhone', '$AreaSizeSqFT', '$Street', '$City','$zip')");
 
+        if($submitQuery)
+        {
+            echo "Request submitted sucessfully!";
+        }else
+            echo "Failed to querying into database!";
 ?>
