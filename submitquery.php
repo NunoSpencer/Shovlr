@@ -7,7 +7,7 @@
 
 <?php
         //connect to database
-        $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+        $db_connection = mysqli_connect('localhost', 'root', '');
 
         $LName=$FName=$Phone=$AreaSize=$Street=$City=$Zip = "";
 
