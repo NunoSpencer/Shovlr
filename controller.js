@@ -9,8 +9,8 @@ $(document).ready( function(e)
 {
     $('#submitButton').click( function() 
     {  
-        var FName = $('#FName').val();
-        var LName = $('#LName').val();
+        var LName = $('#FName').val();
+        var FName = $('#LName').val();
         var Phone = $('#ContactPhone').val();
         var AreaSize = $('#AreaSize').val();
         var Street = $('#street').val();
@@ -22,10 +22,11 @@ $(document).ready( function(e)
     (
         {
             type: 'POST',
-            data: {FName: FName, LName: LName, Phone: Phone, AreaSize: AreaSize, Street: Street, City: City, Zip: Zip},
+            data: {LName: LName, FName: FName, Phone: Phone, AreaSize: AreaSize, Street: Street, City: City, Zip: Zip},
             url : "submitquery.php",
             success: function(result)
             {
+                //$("#result").html(info);  
                 alert(result);
             }
 
