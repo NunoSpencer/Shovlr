@@ -6,10 +6,10 @@
   
   
   <?php
-      $conn = mysql_connect('localhost', 'root', '');
-      $db = mysql_select_db('shovlrdb');
+      $conn = mysqli_connect('localhost', 'root', '');
+      $db = mysqli_select_db('shovlrdb');
 
-      if($con)
+      if($conn)
       {
         echo("Connection sucessfully!");        
       }else
