@@ -9,6 +9,8 @@
         //connect to database
         $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
+        $LName=$FName=$Phone=$AreaSize=$Street=$City=$Zip = "";
+
         if (isset($_POST['LName'])) {
             $LName = $_POST['LName'];
         }
