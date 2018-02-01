@@ -17,6 +17,7 @@
         $City = $_REQUEST['City'];
         $Zip = $_REQUEST['Zip'];    
         
+		//submit request query
         $submitQuery = mysqli_query($db_connection, "INSERT INTO requests VALUES ('$LName', '$FName', '$Phone', '$AreaSize', '$Street', '$City','$Zip')");
 
         if($submitQuery)

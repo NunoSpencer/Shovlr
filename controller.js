@@ -1,9 +1,6 @@
 /*
-    we are using javascript to "ajaxify" the html content from (request.html)... 
-    this means to load the html content (i.e. the requester's info) to the database w/out the need to reload the html page...
+    using javascript to "ajaxify" the html content on request.html
 */
-
-// VERSION 2
 
 $(document).ready( function(e)
 {
