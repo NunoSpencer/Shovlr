@@ -11,7 +11,7 @@ $(document).ready( function(e)
     {  
         var LName = $('#FName').val();
         var FName = $('#LName').val();
-        var Phone = $('#ContactPhone').val();
+        var Phone = $('#Phone').val();
         var AreaSize = $('#AreaSize').val();
         var Street = $('#street').val();
         var City = $('#city').val();
