@@ -9,13 +9,13 @@ $(document).ready( function(e)
 {
     $('#submitButton').click( function() 
     {  
-        var LName = $('#FName').val();
-        var FName = $('#LName').val();
+        var LName = $('#LName').val();
+        var FName = $('#FName').val();
         var Phone = $('#Phone').val();
         var AreaSize = $('#AreaSize').val();
-        var Street = $('#street').val();
-        var City = $('#city').val();
-        var Zip = $('#zip').val();
+        var Street = $('#Street').val();
+        var City = $('#City').val();
+        var Zip = $('#Zip').val();
     });
 
     $.ajax
