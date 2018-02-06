@@ -19,9 +19,17 @@
     echo "<table border = '1'>";
     echo "<tr> <td>Last Name</td> <td>First Name</td> <td>Phone</td> <td> Area Size</td> <td>Street</td> <td>City</td> <td>ZIP</td> <td>Status</td> </tr>";
 
+        //display each result (i.e. each pending request row from the table) 
         while($row = mysqli_fetch_assoc($result))
         {
-
+            echo "<tr> <td>{$row ['LName']}    </td> 
+                       <td>{$row ['FName']}    </td> 
+                       <td>{$row ['Phone']}    </td> 
+                       <td>{$row ['AreaSize']} </td> 
+                       <td>{$row ['Street']}   </td> 
+                       <td>{$row ['City']}     </td> 
+                       <td>{$row ['Zip']}      </td> 
+                       <td>{$row ['Status']}   </td> </tr>";
         }
     
     echo"</table>";
