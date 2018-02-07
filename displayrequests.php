@@ -14,12 +14,14 @@
     //query to display results
     $result = mysqli_query($db_connection, $selectQuery) or die("Failed to querying into database!");
 
+    //variable to count #of pending requests
+    $counter = 0;
 
     //display table headings
     echo "<table border = '1'>";
     echo "<tr> <td>Last Name</td> <td>First Name</td> <td>Phone</td> <td> Area Size</td> <td>Street</td> <td>City</td> <td>ZIP</td> <td>Status</td> </tr>";
 
-        //display each result (i.e. each pending request row from the table) 
+        //display each row (pending request) on the table
         while($row = mysqli_fetch_assoc($result))
         {
             echo "<tr> <td>{$row ['LName']}    </td> 
@@ -30,9 +32,13 @@
                        <td>{$row ['City']}     </td> 
                        <td>{$row ['Zip']}      </td> 
                        <td>{$row ['Status']}   </td> </tr>";
+            
+            $counter++;
         }
     
     echo"</table>";
+
+  
 
 
 

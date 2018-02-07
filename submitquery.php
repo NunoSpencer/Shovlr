@@ -15,10 +15,11 @@
         $AreaSize = $_REQUEST['AreaSize'];
         $Street = $_REQUEST['Street'];
         $City = $_REQUEST['City'];
-        $Zip = $_REQUEST['Zip'];    
+        $Zip = $_REQUEST['Zip'];  
+         
         
 		//submit request query
-        $submitQuery = mysqli_query($db_connection, "INSERT INTO requests VALUES ('$LName', '$FName', '$Phone', '$AreaSize', '$Street', '$City','$Zip')");
+        $submitQuery = mysqli_query($db_connection, "INSERT INTO requests (LName, FName, Phone, AreaSize, Street, City, Zip, Status) VALUES ('$LName', '$FName', '$Phone', '$AreaSize', '$Street', '$City','$Zip', 'pending')");
 
         if($submitQuery)
         {
