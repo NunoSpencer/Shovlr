@@ -6,7 +6,7 @@
   
   
   <?php
-      $conn = mysqli_connect('localhost', 'root', '');
+      $conn = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
       $db = mysqli_select_db('shovlrdb');
 
       if($conn)
