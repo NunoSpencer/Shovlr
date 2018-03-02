@@ -19,7 +19,7 @@
 
     //display table headings
     echo "<table border = '1'>";
-    echo "<tr> <td>Last Name</td> <td>First Name</td> <td>Phone</td> <td> Area Size</td> <td>Street</td> <td>City</td> <td>ZIP</td> <td>Status</td> </tr>";
+    echo "<tr> <td>Last Name</td> <td>First Name</td> <td>Phone</td> <td> Area Size</td> <td>Street</td> <td>City</td> <td>ZIP</td> <td>Status</td> <td>Date</td> <td>Time</td> </tr>";
 
         //display each row (pending request) on the table
         while($row = mysqli_fetch_assoc($result))
@@ -31,15 +31,13 @@
                        <td>{$row ['Street']}   </td> 
                        <td>{$row ['City']}     </td> 
                        <td>{$row ['Zip']}      </td> 
-                       <td>{$row ['Status']}   </td> </tr>";
+                       <td>{$row ['Status']}          </td> 
+                       <td>{$row ['RequestDate']}     </td>
+                       <td>{$row ['RequestTime']}     </td></tr>";
             
             $counter++;
         }
     
     echo"</table>";
-  
-
-
-
 
 ?>
