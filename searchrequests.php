@@ -11,6 +11,6 @@
     */
 
     //connect to database
-    $db_connection = mysqli_connect('localhost', '', '', 'shovlrdb');
+    $db_connection = mysqli_connect('localhost', 'shovlrdb');
 
 ?>
