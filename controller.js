@@ -1,5 +1,5 @@
 /*
-    using javascript to "ajaxify" the html content on request.html
+    using javascript to "ajaxify" the html content on request.html (i.e to pass input data from the form to the database)
 */
 
 $(document).ready( function(e)
