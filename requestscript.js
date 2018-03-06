@@ -1,5 +1,6 @@
 /*
-    using javascript to "ajaxify" the html content on request.html (i.e to pass input data from the form to the database)
+    JS script to submit requests to the database...
+    ...uses javascript to "ajaxify" the html content on request.html (i.e to pass input data from the form to the database)
 */
 
 $(document).ready( function(e)

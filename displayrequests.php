@@ -6,10 +6,10 @@
     */
 
     //connect to database (could also use "require (dbconnect.php);" so we don't have to code this everytime we need a connection")
-    $db_connection = mysqli_connect('localhost','root', 'shovlrdb');
+    $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
     //query to retrieve all pending requests
-    $selectQuery = "SELECT * FROM requests WHERE Status='pending'";
+    $selectQuery = "SELECT * FROM requests WHERE Stat='pending'";
 
     //query to display results
     $result = mysqli_query($db_connection, $selectQuery) or die("Failed to querying into database!");
@@ -31,7 +31,7 @@
                        <td>{$row ['Street']}   </td> 
                        <td>{$row ['City']}     </td> 
                        <td>{$row ['Zip']}      </td> 
-                       <td>{$row ['Status']}          </td> 
+                       <td>{$row ['Stat']}          </td> 
                        <td>{$row ['RequestDate']}     </td>
                        <td>{$row ['RequestTime']}     </td></tr>";
             

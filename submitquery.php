@@ -7,7 +7,7 @@
 */
 
 //connect to database
-$db_connection = mysqli_connect('localhost','root', 'shovlrdb');
+$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
 $LName = $_REQUEST['LName'];
 $FName = $_REQUEST['FName'];
@@ -18,17 +18,15 @@ $City = $_REQUEST['City'];
 $Zip = $_REQUEST['Zip'];  
 
 //$RequestID = uniqid('ID');
-$RequestID = uniqid(rand(10,99), true);
+$RequestID = uniqid(rand(10,99), false);
 
 date_default_timezone_set('EST');
 
 $Date = date("Y-m-d");
 $Time = date("g:i a", time());
 
-
-
 //submit request query
-$submitQuery = mysqli_query($db_connection, "INSERT INTO requests (LName, FName, Phone, AreaSize, Street, City, Zip, Status, RequestID, RequestDate, RequestTime) VALUES 
+$submitQuery = mysqli_query($db_connection, "INSERT INTO requests (LName, FName, Phone, AreaSize, Street, City, Zip, Stat, RequestID, RequestDate, RequestTime) VALUES 
     ('$LName', '$FName', '$Phone', '$AreaSize', '$Street', '$City','$Zip', 'pending', '$RequestID', '$Date', '$Time')");
 
 if($submitQuery)
