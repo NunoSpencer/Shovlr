@@ -20,7 +20,7 @@
         $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
         //save search info to variables
-        $city = $_POST["CityList"];
+        $city = $_POST["City"];
         $areasize = $_POST["AreaSizeList"];
         //$plowtruck = $_POST["PlowTruckList"];
 
