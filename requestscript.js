@@ -11,6 +11,7 @@ $(document).ready( function(e)
         var FName = $('#FName').val();
         var Phone = $('#Phone').val();
         var AreaSize = $('#AreaSize').val();
+        var PlowTruck = $('input[type="radio"]').val();
         var Street = $('#Street').val();
         var City = $('#City').val();
         var Zip = $('#Zip').val();
@@ -20,7 +21,7 @@ $(document).ready( function(e)
     (
         {
             type: 'POST',
-            data: {LName: LName, FName: FName, Phone: Phone, AreaSize: AreaSize, Street: Street, City: City, Zip: Zip},
+            data: {LName: LName, FName: FName, Phone: Phone, AreaSize: AreaSize, PlowTruck: PlowTruck, Street: Street, City: City, Zip: Zip},
             url : "submitquery.php",
             success: function(result)
             {

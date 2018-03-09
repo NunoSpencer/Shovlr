@@ -30,7 +30,7 @@
       <form action="searchrequests.php" method="post">
         *City:
         <select id="City" name="City" >
-          <option value="choose city"> - choose a city -</option>
+          <option value="">- choose a city -</option>
           <option value="Barrington"> Barrington </option>
           <option value="Bristol"> Bristol </option>
           <option value="Burriville"> Burriville </option>
@@ -73,7 +73,7 @@
       
         Area size (in sq ft):
         <select id="AreaSizeList" name="AreaSizeList">
-          <option value="chooseAreaSize"> - choose area size - </option>
+          <option value=""> - choose area size - </option>
           <option value="lessFive"> less than 5 </option>
           <option value="fiveFifteen"> 5 - 15 </option>
           <option value="sixteenTwentyfive"> 16 - 25 </option>
@@ -86,10 +86,22 @@
       
         Plow truck?
         <select id="PlowTruckList" name="PlowTruckList">
+          <option value="choice"> - choose an option - </option>
           <option value="no"> no </option>
           <option value="yes"> yes </option>
         </select>
-  
+        
+
+        
+        <!--- <label class="pt">
+              <input type="radio" name="PlowTruckList" value="no" checked> No
+          </label>
+          <label class="pt">
+              <input type="radio" name="PlowTruckList" value="yes"> Yes 
+          </label>
+          -->
+      
+       
         <button id="SearchButton" title='Search requests'>Search</button>
       </form> 
      

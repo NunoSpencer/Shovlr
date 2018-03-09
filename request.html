@@ -22,16 +22,16 @@
     <h1 id="headertitle" class=""><strong>Request Snow Removal Service (fill form)</strong></h1>
     
     <form id="SubmitRequestForm" action="submitquery.php" method="post">
-        First name:<br>
+        First name:
         <input type="text" id="FName" name="FName" value=""><br>
-        Last name:<br>
+        Last name:
         <input type="text" id="LName" name="LName" value=""><br>
-        Contact phone:<br>
+        Contact phone:
         <input type="text" id="Phone" name="Phone" value=""><br>
-        Size of area to be shoveled (in sq ft):<br>
+        Size of area to be shoveled (in sq ft):
         <input type="text" id="AreaSize" name="AreaSize" value=""><br>
         Location of Area to be shoveled<br>
-        Street:<br>
+        Street:
         <input type="text" id="Street" name="Street" value="">
         <br>
         City:
@@ -77,17 +77,22 @@
           <option value="Woonsocket"> Woonsocket </option>
         </select>
         <br>
-        ZIP:<br>
-        <input type="text" id="Zip" name="Zip" value=""><br>
-        Need plow truck?<br>
-        <input type="radio" name="yes"> Yes <br>
-        <input type="radio" name="no"> No <br>
-
-        <button id="submitButton" title='Submit request'>Submit</button>
-        <input type="button" onclick="javascript:history.back()"title='Cancel request' value="Cancel" />
-      </form>
-
-      <span id="result"></span>
+      ZIP:
+      <input type="text" id="Zip" name="Zip" value=""><br>
+      
+      Plow truck required?
+      <div class="form-group">
+        <label class="radio-inline">
+            <input type="radio" name="PlowTruck" value="no" checked> No
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="PlowTruck" value="yes"> Yes 
+        </label>
+     </div>
+      
+      <button id="submitButton" title='Submit request'>Submit</button>
+      <input type="button" onclick="javascript:history.back()"title='Cancel request' value="Cancel" />
+    </form>
 
   </div>
   

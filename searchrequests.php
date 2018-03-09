@@ -13,55 +13,68 @@
             
     */
 
-    //test that search info was sent from front-end to database
+    
     if ($_SERVER["REQUEST_METHOD"]=="POST")
     {
         //connect to database
         $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
-        //save search info to variables
-        $city = $_POST["City"];
-        $areasize = $_POST["AreaSizeList"];
-        //$plowtruck = $_POST["PlowTruckList"];
-
-        //SQL query
-        $searchQuery = "SELECT LName, FName, Phone, AreaSize, Street, City, Zip, Stat, RequestID, RequestDate, RequestTime
-                        FROM requests
-                        WHERE City='$city'
-                        AND Stat ='pending' ";
-                    
-        //search results query (match search info with database records)
-        $searchQueryResults = mysqli_query($db_connection, $searchQuery);
+        //save input info to variables
+        $city = $_POST["City"];                     //city input info from front-end
+        $plowtruck = $_POST["PlowTruckList"];       //plowtruck info from front-end
+        $plowtruckChoice = "";                      //if plowtruck is selected from front-end, save value into this variable
         
-        //display results as on a table
-        echo "<table border = '1'>";
-        echo "<tr> <td>Last Name</td> <td>First Name</td> <td>Phone</td> <td> Area Size</td> <td>Street</td> <td>City</td> <td>ZIP</td> <td>Status</td> <td>Date</td> <td>Time</td> </tr>";
-
-
-        if(mysqli_num_rows($searchQueryResults) > 0)
+        
+        if ($plowtruck != 'choice')                 //test that a plowtruck selection was chosen
         {
-            while($row=mysqli_fetch_array($searchQueryResults))
+            $plowtruckChoice = "AND PlowTruck = '$plowtruck'";
+        }
+
+        //SQL queries
+        $queryCity= "SELECT LName, FName, Phone, AreaSize, PlowTruck, Street, City, Zip, Stat, RequestID, RequestDate, RequestTime
+                            FROM requests
+                            WHERE City='$city'
+                            AND Stat ='pending'
+                            $plowtruckChoice";                     
+
+        //search results for city
+        $cityResults = mysqli_query($db_connection, $queryCity);
+
+        if(empty($_POST["City"]))                           //if no city selected from drop-down list
+        {
+            echo "a city is required!";
+        }
+        else if(mysqli_num_rows($cityResults) > 0) 
+        {
+            $rowcount = mysqli_num_rows($cityResults);      //number of results, if any..                                      
+
+            printf("%d pending request(s) found for %s requiring plow truck!\n", $rowcount, $city);
+            echo "\n";
+
+            //diplay table headings 
+            echo "<table border = '1'>";
+            echo "<tr> <td> Last Name </td> <td> First Name </td> <td> Phone </td> <td> Area Size </td> <td> PlowTruck </td> <td> Street </td> <td> City </td> <td> ZIP </td> <td> Status </td> <td> Date </td> <td> Time </td> </tr>";
+
+            //display results on the table
+            while($row=mysqli_fetch_array($cityResults))
             {
                 echo "<tr>  <td>{$row ['LName']}    </td> 
                             <td>{$row ['FName']}    </td> 
                             <td>{$row ['Phone']}    </td> 
-                            <td>{$row ['AreaSize']} </td> 
+                            <td>{$row ['AreaSize']} </td>
+                            <td>{$row ['PlowTruck']} </td>  
                             <td>{$row ['Street']}   </td> 
                             <td>{$row ['City']}     </td> 
                             <td>{$row ['Zip']}      </td> 
                             <td>{$row ['Stat']}          </td> 
                             <td>{$row ['RequestDate']}     </td>
                             <td>{$row ['RequestTime']}     </td></tr>";
-                
-                //echo "<br>";
             }
-        }else if(mysqli_num_rows($searchQueryResults) == null)
+        }else /*if(!(mysqli_num_rows($cityResults)))    */                     //else if no results at all
         {
-            echo "No requests found for " + $city;
+            printf("There are currently no pending requests for %s! \n", $city);
         }
-        
-
-    }
-
-
+            
+    }        
+    
 ?>
