@@ -29,8 +29,20 @@
         Contact phone:
         <input type="text" id="Phone" name="Phone" value=""><br>
         Size of area to be shoveled (in sq ft):
-        <input type="text" id="AreaSize" name="AreaSize" value=""><br>
-        Location of Area to be shoveled<br>
+        <select id="AreaSizeList" name="AreaSizeList">
+          <option value="choice"> - choose area size (sq. ft)- </option>
+          <option value="<5"> less than 5 </option>
+          <option value="[5-15]"> 5 - 15 </option>
+          <option value="[16-25]"> 16 - 25 </option>
+          <option value="[26-50]"> 26 - 50 </option>
+          <option value="[51-80]"> 51 - 80 </option>
+          <option value="[81-120]"> 81 - 120 </option>
+          <option value="[121-150]"> 121 - 150 </option>
+          <option value=">150"> greater than 150 </option>
+        </select>
+        <br>
+        <br>
+        Location of Area to be shoveled:<br>
         Street:
         <input type="text" id="Street" name="Street" value="">
         <br>

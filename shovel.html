@@ -73,15 +73,15 @@
       
         Area size (in sq ft):
         <select id="AreaSizeList" name="AreaSizeList">
-          <option value=""> - choose area size - </option>
-          <option value="lessFive"> less than 5 </option>
-          <option value="fiveFifteen"> 5 - 15 </option>
-          <option value="sixteenTwentyfive"> 16 - 25 </option>
-          <option value="twentysixFifty"> 26 - 50 </option>
-          <option value="fiftyoneeighty"> 51 - 80 </option>
-          <option value="eightyoneHundredTwenty"> 81 - 120 </option>
-          <option value="hundredtwentyoneonefifty"> 121 - 150 </option>
-          <option value="plus150"> greater than 150 </option>
+          <option value="choice"> - choose area size (sq. ft)- </option>
+          <option value="<5"> less than 5 </option>
+          <option value="[5-15]"> 5 - 15 </option>
+          <option value="[16-25]"> 16 - 25 </option>
+          <option value="[26-50]"> 26 - 50 </option>
+          <option value="[51-80]"> 51 - 80 </option>
+          <option value="[81-120]"> 81 - 120 </option>
+          <option value="[121-150]"> 121 - 150 </option>
+          <option value=">150"> greater than 150 </option>
         </select>
       
         Plow truck?
@@ -90,17 +90,6 @@
           <option value="no"> no </option>
           <option value="yes"> yes </option>
         </select>
-        
-
-        
-        <!--- <label class="pt">
-              <input type="radio" name="PlowTruckList" value="no" checked> No
-          </label>
-          <label class="pt">
-              <input type="radio" name="PlowTruckList" value="yes"> Yes 
-          </label>
-          -->
-      
        
         <button id="SearchButton" title='Search requests'>Search</button>
       </form> 

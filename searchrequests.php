@@ -20,14 +20,21 @@
         $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
         //save input info to variables
-        $city = $_POST["City"];                     //city input info from front-end
-        $plowtruck = $_POST["PlowTruckList"];       //plowtruck info from front-end
-        $plowtruckChoice = "";                      //if plowtruck is selected from front-end, save value into this variable
+        $city = $_POST["City"];                     //city input from front-end
+        $plowtruck = $_POST["PlowTruckList"];       //plowtruck input from front-end
+        $areaSize = $_POST["AreaSizeList"];         //areaSize input from front-end
         
+        //extra search criteria (plowtruck and areasize)must be part of query save as strings 
+        $plowtruckChoice = "";                      //if plowtruck is selected from front-end
+        $areaSizeChoice = "";                       //if areasize is selected from front-end
         
         if ($plowtruck != 'choice')                 //test that a plowtruck selection was chosen
         {
             $plowtruckChoice = "AND PlowTruck = '$plowtruck'";
+        }
+        if ($areaSize != 'choice')                 //test that a plowtruck selection was chosen
+        {
+            $areaSizeChoice = "AND AreaSize = '$areaSize'";
         }
 
         //SQL queries
@@ -35,7 +42,8 @@
                             FROM requests
                             WHERE City='$city'
                             AND Stat ='pending'
-                            $plowtruckChoice";                     
+                            $plowtruckChoice
+                            $areaSizeChoice";                     
 
         //search results for city
         $cityResults = mysqli_query($db_connection, $queryCity);
