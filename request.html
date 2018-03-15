@@ -27,7 +27,10 @@
         Last name:
         <input type="text" id="LName" name="LName" value=""><br>
         Contact phone:
-        <input type="text" id="Phone" name="Phone" value=""><br>
+        <input type="text" id="Phone" name="Phone" value=""
+        pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$"
+        oninvalid="setCustomValidity('Invalid Input. Please use the format: (401)-555-5555 or 401-555-5555 or 401 555 5555')"
+        onchange="try{setCustomValidity('')}catch(e){}"><br>
         Size of area to be shoveled (in sq ft):
         <select id="AreaSizeList" name="AreaSizeList">
           <option value="choice"> - choose area size (sq. ft)- </option>
@@ -90,7 +93,12 @@
         </select>
         <br>
       ZIP:
-      <input type="text" id="Zip" name="Zip" value=""><br>
+      <input type="text" id="Zip" name="Zip" value=""
+      pattern="^\d{5}(?:[-\s]\d{4})?$"
+      oninvalid="setCustomValidity('Invalid Input. Please use the format: 01234 or 01234-5678 or 01234 5678')"
+      onchange="try{setCustomValidity('')}catch(e){}">
+      <br>
+
       
       Plow truck required?
       <div class="form-group">
