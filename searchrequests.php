@@ -17,7 +17,7 @@
     if ($_SERVER["REQUEST_METHOD"]=="POST")
     {
         //connect to database
-        $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+        $db_connection = mysqli_connect('localhost', '', '', 'shovlrdb');
 
         //save input info to variables
         $city = $_POST["City"];                     //city input from front-end
@@ -76,7 +76,8 @@
                             <td>{$row ['Zip']}      </td> 
                             <td>{$row ['Stat']}          </td> 
                             <td>{$row ['RequestDate']}     </td>
-                            <td>{$row ['RequestTime']}     </td></tr>";
+                            <td>{$row ['RequestTime']}     </td>
+                            <td><form action='accept.php' method='POST'><input type='hidden' name='Id' value='".$row["RequestID"]."'/><input type='submit' name='submit-btn' value='Accept' /></form></tr>";
             }
         }else /*if(!(mysqli_num_rows($cityResults)))    */                     //else if no results at all
         {

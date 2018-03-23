@@ -7,16 +7,18 @@
 */
 
 //connect to database
-$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+$db_connection = mysqli_connect('localhost', '', '', 'shovlrdb');
 
 $LName = $_REQUEST['LName'];
 $FName = $_REQUEST['FName'];
 $Phone = $_REQUEST['Phone'];
 $AreaSize = $_REQUEST['AreaSizeList'];
 $PlowTruck = $_REQUEST['PlowTruck'];
-$Street = $_REQUEST['Street'];
-$City = $_REQUEST['City'];
-$Zip = $_REQUEST['Zip'];  
+$StreetNumber = $_REQUEST['street_number']; 
+$StreetRoute = $_REQUEST['route'];
+$Street = $StreetNumber.' '.$StreetRoute;
+$City = $_REQUEST['locality'];
+$Zip = $_REQUEST['postal_code'];  
 
 //$RequestID = uniqid('ID');
 //$RequestID = uniqid('SHV',rand(1,10));
@@ -34,6 +36,8 @@ $submitQuery = mysqli_query($db_connection, "INSERT INTO requests (LName, FName,
 if($submitQuery)
 {
     echo "Request submitted sucessfully!";
+    //echo $AreaSize;
+
 }else
     echo "Failed to querying into database!";
 ?>

@@ -6,7 +6,7 @@
     */
 
     //connect to database (could also use "require (dbconnect.php);" so we don't have to code this everytime we need a connection")
-    $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+    $db_connection = mysqli_connect('localhost', '', '', 'shovlrdb');
 
     //query to retrieve all pending requests
     $selectQuery = "SELECT * FROM requests WHERE Stat='pending'";
@@ -34,8 +34,9 @@
                        <td>{$row ['Zip']}      </td> 
                        <td>{$row ['Stat']}          </td> 
                        <td>{$row ['RequestDate']}     </td>
-                       <td>{$row ['RequestTime']}     </td></tr>";
-            
+                       <td>{$row ['RequestTime']}     </td>
+                       <td><form action='accept.php' method='POST'><input type='hidden' name='Id' value='".$row["RequestID"]."'/><input type='submit' name='submit-btn' value='Accept' /></form></td>
+                       </tr>"; 
             $counter++;
         }
     
