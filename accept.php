@@ -1,5 +1,5 @@
 <?php
-	$db_connection = mysqli_connect('localhost', '', '', 'shovlrdb');
+	$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
 	if(isset($_POST['Id']))
 	{
