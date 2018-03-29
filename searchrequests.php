@@ -17,7 +17,7 @@
     if ($_SERVER["REQUEST_METHOD"]=="POST")
     {
         //connect to database
-        $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+        $db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
 
         //save input info to variables
         $city = $_POST["City"];                     //city input from front-end
@@ -59,6 +59,7 @@
             printf("%d pending request(s) found for %s requiring plow truck!\n", $rowcount, $city);
             echo "\n";
 
+
             //diplay table headings 
             echo "<table border = '1'>";
             echo "<tr> <td> Last Name </td> <td> First Name </td> <td> Phone </td> <td> Area Size </td> <td> PlowTruck </td> <td> Street </td> <td> City </td> <td> ZIP </td> <td> Status </td> <td> Date </td> <td> Time </td> </tr>";
@@ -76,8 +77,11 @@
                             <td>{$row ['Zip']}      </td> 
                             <td>{$row ['Stat']}          </td> 
                             <td>{$row ['RequestDate']}     </td>
-                            <td>{$row ['RequestTime']}     </td></tr>";
+                            <td>{$row ['RequestTime']}     </td>
+                            <td><button class='acceptButton' name = 'id' value='".$row["RequestID"]."'>Accept</button></td></tr>";
             }
+
+            echo"</table>";
         }else /*if(!(mysqli_num_rows($cityResults)))    */                     //else if no results at all
         {
             printf("There are currently no pending requests for %s! \n", $city);

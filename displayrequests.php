@@ -1,3 +1,5 @@
+
+
 <?php
     /*
             Database query to display pending shovel requests... 
@@ -6,7 +8,7 @@
     */
 
     //connect to database (could also use "require (dbconnect.php);" so we don't have to code this everytime we need a connection")
-    $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+    $db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
 
     //query to retrieve all pending requests
     $selectQuery = "SELECT * FROM requests WHERE Stat='pending'";
@@ -16,6 +18,19 @@
 
     //variable to count #of pending requests
     $counter = 0;
+
+
+    echo "
+    <html>
+    <head>
+      <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script> 
+      <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
+      <script src='acceptscript.js' type='text/javascript'></script>
+      <title></title>
+    </head>
+    <body>
+    <form id='AcceptRequestForm' action='accept.php' method='post'>";
+    
 
     //display table headings
     echo "<table border = '1'>";
@@ -34,11 +49,17 @@
                        <td>{$row ['Zip']}      </td> 
                        <td>{$row ['Stat']}          </td> 
                        <td>{$row ['RequestDate']}     </td>
-                       <td>{$row ['RequestTime']}     </td></tr>";
-            
+                       <td>{$row ['RequestTime']}     </td>
+                       <td><button class='acceptButton' name = 'id' value='".$row["RequestID"]."'>Accept</button></td>
+                       </tr>"; 
             $counter++;
         }
     
-    echo"</table>";
+    echo"</table>
+         </form>
+         </body>
+         </html>";
 
 ?>
+
+
