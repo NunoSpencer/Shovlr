@@ -17,7 +17,7 @@
     if ($_SERVER["REQUEST_METHOD"]=="POST")
     {
         //connect to database
-        $db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
+        $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
         //save input info to variables
         $city = $_POST["City"];                     //city input from front-end

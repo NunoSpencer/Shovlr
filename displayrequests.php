@@ -8,7 +8,7 @@
     */
 
     //connect to database (could also use "require (dbconnect.php);" so we don't have to code this everytime we need a connection")
-    $db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
+    $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
     //query to retrieve all pending requests
     $selectQuery = "SELECT * FROM requests WHERE Stat='pending'";

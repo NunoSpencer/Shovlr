@@ -5,7 +5,7 @@
     when user clicks LET'S SHOVEL button on AcceptRequest.html, the info from the form will on that page will be submitted to the database ("requestsaccepted" table) 
 */
 
-$db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
+$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
 	$shovelerFName = $_REQUEST['shovelerFName'];
 	$shovelerLName = $_REQUEST['shovelerLName'];

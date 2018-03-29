@@ -7,7 +7,7 @@
 */
 
 //connect to database
-$db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
+$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
 $LName = $_REQUEST['LName'];
 $FName = $_REQUEST['FName'];
