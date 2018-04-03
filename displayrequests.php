@@ -1,5 +1,3 @@
-
-
 <?php
     /*
             Database query to display pending shovel requests... 
