@@ -24,7 +24,7 @@ $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 	$submitAcceptQuery = mysqli_query($db_connection, "INSERT INTO requestsaccepted (shovelerFName, shovelerLName, shovelerPhone, acceptID, acceptDate, acceptTime, shovelStatus) VALUES 
 		('$shovelerFName', '$shovelerLName', '$shovelerPhone', '$acceptID', '$acceptDate', '$acceptTime', 'shovel in process')");
 
-
+	
 	if($submitAcceptQuery)
 	{
 		echo "Request Accepted! The requesting person has been informed and will be contacting you soon!";
