@@ -16,13 +16,18 @@
 
   <title>Shovlr - Request Snow Removal Service in RI</title>
 
+
 </head>
 
-<body>
+<body>    
   <div class="bg"></div>
   <div class="main-title-bar">
     <h1 id="headertitle" class=""><strong>Request Snow Removal Service (fill form)</strong></h1>
     
+    <p>NOTICE! All requests are automatically removed from the listings after 2 days from creation date.
+       <!--Please resubmit your request after 2 days if it has not been accepted and you still wish to request shoveling services.-->
+    </p>
+
     <form id="SubmitRequestForm" action="submitquery.php" method="post">
         First name:
         <input type="text" id="FName" name="FName" value=""><br>
@@ -30,7 +35,8 @@
         <input type="text" id="LName" name="LName" value=""><br>
         Contact phone:
         <input type="text" id="Phone" name="Phone" value=""
-        ><br>
+        pattern="^(1)(4)(0)(1)(\d{7})$" title = "Please Enter a number in the format 1401XXXXXXX"><br>
+        <!-- pattern="^(\d{3})[- ]?(\d{4})$" This is a more general regex for a phone form XXXXXXX XXX XXXX XXX-XXXX -->
         Size of area to be shoveled (in sq ft):
         <select id="AreaSizeList" name="AreaSizeList">
           <option value="choice"> - choose area size (sq. ft)- </option>
@@ -47,27 +53,25 @@
       <div id="locationField">
       <input id="autocomplete" placeholder="Enter your address"
              onFocus="geolocate()" type="text"></input>
-<<<<<<< HEAD
       </div>
-=======
->>>>>>> 84292b40e1e213225a699187689bf27d3725b214
     </div>
 
     <table id="address">
+
       <tr>
-        <td class="label">Street address</td>
+        <td>Street Address:</td>
         <td class="slimField"><input class="field" id="street_number" name="street_number"
               disabled="true" readonly></input></td>
         <td class="wideField" colspan="2"><input class="field" id="route" name="route" 
               disabled="true" readonly></input></td>
       </tr>
       <tr>
-        <td class="label">City</td>
+        <td>City:</td>
         <td class="wideField" colspan="3"><input class="field" id="locality" name="locality" 
               disabled="true" readonly></input></td>
       </tr>
       <tr>
-        <td class="label">Zip code</td>
+        <td>Zip code:</td>
         <td class="wideField"><input class="field" id="postal_code" name="postal_code" 
               disabled="true" readonly></input></td>
       </tr>
@@ -86,6 +90,8 @@
       <button id="submitButton" title='Submit request'>Submit</button>
       <input type="button" onclick="javascript:history.back()"title='Cancel request' value="Cancel" />
     </form>
+
+  
 
   </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsjpDlj8lZqDvYO5mFnEbggFtcaxy6_P4&libraries=places&callback=initAutocomplete"

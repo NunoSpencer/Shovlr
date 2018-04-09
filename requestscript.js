@@ -19,17 +19,23 @@ $(document).ready( function(e)
         var City = $('#locality').val();
         var Zip = $('#postal_code').val();
 
+        //Puts Phone in correct format ERROR HERE
+        //Phone = Phone.replace(/ /g,"");
+        //Phone = Phone.replace(/-/g,"");
+        //Phone = "1401" + Phone;
+        //alert(Phone);
+
         var MissingData = "";
 
         //alert(AreaSize);
 
-        if (FName == "") {MissingData = MissingData.concat("First Name\n");}
-        if (LName == "") {MissingData = MissingData.concat("Last Name\n");}
-        if (Phone == "") {MissingData = MissingData.concat("Phone\n");}
-        if (AreaSize == "choice") {MissingData = MissingData.concat("Area Size\n");}
-        if (Street == " ") {MissingData = MissingData.concat("Street\n");}
-        if (City == "") {MissingData = MissingData.concat("City\n");}
-        if (Zip == "") {MissingData = MissingData.concat("Zip\n");}
+        if (FName == "") {MissingData = MissingData + "First Name\n";}
+        if (LName == "") {MissingData = MissingData + "Last Name\n";}
+        if (Phone == "1401") {MissingData = MissingData + "Phone\n";}
+        if (AreaSize == "choice") {MissingData = MissingData + "Area Size\n";}
+        if (Street == " ") {MissingData = MissingData + "Street\n";}
+        if (City == "") {MissingData = MissingData + "City\n";}
+        if (Zip == "") {MissingData = MissingData + "Zip\n";}
 
         if(MissingData != ""){
             alert("Please fill in the following to contiune: \n\n" + MissingData);

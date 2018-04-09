@@ -6,7 +6,7 @@
             input criteria (for instance, if user chooses a city, pending requests are returned based on the city chosen 
             by the user. 
 
-            - "city" is required field -"area size" and "plow truck" are optional.
+            - "city", "area size" and "plow truck" are optional.
 
             - if user inputs more than 1  criteria (ex. "city" + "area size") the result is returned based on those 
             criteria together (i.e. displays pending requests based on "city" and "area size")
@@ -19,20 +19,50 @@
         //connect to database
         $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
+        //delete
+        $deleteQuery = "DELETE FROM requests WHERE RequestDate < (CURDATE() - INTERVAL 2 DAY)";
+        mysqli_query($db_connection, $deleteQuery) or die("Failed to querying into database for delete!");
+
         //save input info to variables
-        $city = $_POST["City"];                     //city input from front-end
-        $plowtruck = $_POST["PlowTruckList"];       //plowtruck input from front-end
-        $areaSize = $_POST["AreaSizeList"];         //areaSize input from front-end
+        
+        $city = "";
+        $plowtruck = "";
+        $areaSize = "";
+
+        // This will evaluate to TRUE so the text will be printed.
+        if (isset($_POST["City"])) {
+          $city = $_POST["City"];
+        }
+
+        if (isset($_POST["PlowTruckList"])) {
+          $plowtruck = $_POST["PlowTruckList"];
+        }
+
+        if (isset($_POST["AreaSizeList"])) {
+          $areaSize = $_POST["AreaSizeList"];
+        }
+
+        
+
+                             //city input from front-end
+              //plowtruck input from front-end
+                 //areaSize input from front-end
         
         //extra search criteria (plowtruck and areasize)must be part of query save as strings 
+        $cityChoice = "";
         $plowtruckChoice = "";                      //if plowtruck is selected from front-end
-        $areaSizeChoice = "";                       //if areasize is selected from front-end
+        $areaSizeChoice = "";
+
+        if($city != "")
+        {
+          $cityChoice = "AND City = '$city'";
+        }                       //if areasize is selected from front-end
         
-        if ($plowtruck != 'choice')                 //test that a plowtruck selection was chosen
+        if ($plowtruck != "choice")                 //test that a plowtruck selection was chosen
         {
             $plowtruckChoice = "AND PlowTruck = '$plowtruck'";
         }
-        if ($areaSize != 'choice')                 //test that a plowtruck selection was chosen
+        if ($areaSize != "choice")                 //test that a plowtruck selection was chosen
         {
             $areaSizeChoice = "AND AreaSize = '$areaSize'";
         }
@@ -40,53 +70,188 @@
         //SQL queries
         $queryCity= "SELECT LName, FName, Phone, AreaSize, PlowTruck, Street, City, Zip, Stat, RequestID, RequestDate, RequestTime
                             FROM requests
-                            WHERE City='$city'
-                            AND Stat ='pending'
+                            WHERE Stat ='pending'
+                            $cityChoice
                             $plowtruckChoice
                             $areaSizeChoice";                     
 
         //search results for city
         $cityResults = mysqli_query($db_connection, $queryCity);
 
-        if(empty($_POST["City"]))                           //if no city selected from drop-down list
-        {
-            echo "a city is required!";
-        }
-        else if(mysqli_num_rows($cityResults) > 0) 
+        if(mysqli_num_rows($cityResults) > 0) 
         {
             $rowcount = mysqli_num_rows($cityResults);      //number of results, if any..                                      
 
-            printf("%d pending request(s) found for %s requiring plow truck!\n", $rowcount, $city);
             echo "\n";
 
+            displayHTML();
 
+             
+            displaySearch($city, $plowtruck, $areaSize, $rowcount);
+            
             //diplay table headings 
             echo "<table border = '1'>";
-            echo "<tr> <td> Last Name </td> <td> First Name </td> <td> Phone </td> <td> Area Size </td> <td> PlowTruck </td> <td> Street </td> <td> City </td> <td> ZIP </td> <td> Status </td> <td> Date </td> <td> Time </td> </tr>";
+            echo "<tr> <td> Last Name </td> <td> First Name </td> <td> Area Size </td> <td> PlowTruck </td> <td> Street </td> <td> City </td> <td> ZIP </td> <td> Date </td> <td> Time </td><td> </td></tr>";
 
             //display results on the table
             while($row=mysqli_fetch_array($cityResults))
             {
                 echo "<tr>  <td>{$row ['LName']}    </td> 
-                            <td>{$row ['FName']}    </td> 
-                            <td>{$row ['Phone']}    </td> 
+                            <td>{$row ['FName']}    </td>  
                             <td>{$row ['AreaSize']} </td>
                             <td>{$row ['PlowTruck']} </td>  
                             <td>{$row ['Street']}   </td> 
                             <td>{$row ['City']}     </td> 
                             <td>{$row ['Zip']}      </td> 
-                            <td>{$row ['Stat']}          </td> 
                             <td>{$row ['RequestDate']}     </td>
                             <td>{$row ['RequestTime']}     </td>
                             <td><button class='acceptButton' name = 'id' value='".$row["RequestID"]."'>Accept</button></td></tr>";
             }
 
-            echo"</table>";
+            echo"</table>
+                 </form>
+                 </body>
+                 </html>";
+
         }else /*if(!(mysqli_num_rows($cityResults)))    */                     //else if no results at all
         {
-            printf("There are currently no pending requests for %s! \n", $city);
+            $rowcount = mysqli_num_rows($cityResults); 
+            displaySearch($city, $plowtruck, $areaSize, $rowcount);
         }
             
     }        
     
+    function displaySearch($city, $plowtruck, $areaSize, $rowcount)
+    {
+      if($city != "" || $plowtruck != "choice" || $areaSize != "choice")
+      {
+
+        if ($city != ""){
+          $city = " found for ".$city;
+          }
+              
+        if($plowtruck != "choice"){
+          if($plowtruck == "no"){
+            $plowtruck = " not requiring a plow truck";
+          }else{
+            $plowtruck = " requiring a plowtruck";
+          }
+          }else{
+            $plowtruck = "";
+          }
+
+          if($areaSize != "choice"){
+            $areaSize = " with the area size ".$areaSize;
+          }else{
+            $areaSize = "";
+          }
+            
+          printf("%d pending request(s)%s%s%s!\n", $rowcount, $city, $plowtruck, $areaSize);
+        }
+        else{
+          printf("%d pending request(s)!\n", $rowcount);
+        }
+    }
+
+    function displayHTML()
+    {
+       echo "
+            <html>
+            <head>
+            <meta charset='utf-8>
+            <meta name='description' content='Provide Snow Removal Service'>
+            <meta name='author' content='SitePoint'>
+
+            <link rel='stylesheet' type='text/css' href='bootstrap.min.css'>
+            <link rel='stylesheet' type='text/css' href='custom.css'>
+                      
+            <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script> 
+            <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
+            <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script> 
+            <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous'></script>
+            <script src='acceptscript.js' type='text/javascript'></script>
+              
+            <title></title>
+            
+            </head>
+                    
+            <body>
+                    
+              <div class='bg'></div>
+              <div class='main-title-bar'>
+
+              <h1 id='headertitle' class=''><strong>Provide Snow Removal Service</strong></h1>
+              
+              <form action='searchrequests.php' method='post'>
+                City:
+                <select id='City' name='City' >
+                  <option value=''>- choose a city -</option>
+                  <option value='Barrington'> Barrington </option>
+                  <option value='Bristol'> Bristol </option>
+                  <option value='Burriville'> Burriville </option>
+                  <option value='Central Falls'> Central Falls </option>
+                  <option value='Charlestown'> Charlestown </option>
+                  <option value='Coventry'> Coventry </option>
+                  <option value='Cranston'> Cranston </option>
+                  <option value='Cumberland'> Cumberland </option>
+                  <option value='East Greenwich'> East Greenwich </option>
+                  <option value='East Providence'> East Providence </option>
+                  <option value='Exeter'> Exeter </option>
+                  <option value='Foster'> Foster </option>
+                  <option value='Glocester'> Glocester </option>
+                  <option value='Hopkinton'> Hopkinton </option>
+                  <option value='Jamestown'> Jamestown </option>
+                  <option value='Johnston'> Johnston </option>
+                  <option value='Lincoln'> Lincoln </option>
+                  <option value='Little Compton'> Little Compton </option>
+                  <option value='Middletown'> Middletown </option>
+                  <option value='Narragansett'> Narragansett </option>
+                  <option value='Newport'> Newport </option>
+                  <option value='New Shoreham'> New Shoreham </option>
+                  <option value='North Kingstown'> North Kingstown </option>
+                  <option value='North Providence'> North Providence </option>
+                  <option value='North Smithfield'> North Smithfield </option>
+                  <option value='Pawtucket'> Pawtucket </option>
+                  <option value='Providence'> Providence </option>
+                  <option value='Richmond'> Richmond </option>
+                  <option value='Scituate'> Scituate </option>
+                  <option value='Smithfield'> Smithfield </option>
+                  <option value='South Kingstown'> South Kingstown </option>
+                  <option value='Tiverton'> Tiverton </option>
+                  <option value='Warren'> Warren </option>
+                  <option value='Warwick'> Warwick </option>
+                  <option value='Westerly' > Westerly </option>
+                  <option value='West Greenwich'> West Greenwich </option>
+                  <option value='West Warwick'> West Warwick </option>
+                  <option value='Woonsocket'> Woonsocket </option>
+                </select>
+              
+                Area size (in sq ft):
+                <select id='AreaSizeList' name='AreaSizeList'>
+                  <option value='choice'> - choose area size (sq. ft)- </option>
+                  <option value='<5'> less than 5 </option>
+                  <option value='[5-15]'> 5 - 15 </option>
+                  <option value='[16-25]'> 16 - 25 </option>
+                  <option value='[26-50]'> 26 - 50 </option>
+                  <option value='[51-80]'> 51 - 80 </option>
+                  <option value='[81-120]'> 81 - 120 </option>
+                  <option value='[121-150]'> 121 - 150 </option>
+                  <option value='>150'> greater than 150 </option>
+                </select>
+              
+                Plow truck?
+                <select id='PlowTruckList' name='PlowTruckList'>
+                  <option value='choice'> - choose an option - </option>
+                  <option value='no'> no </option>
+                  <option value='yes'> yes </option>
+                </select>
+               
+                <button id='SearchButton' title='Search requests'>Search</button> (Click Search with no fields to see all requests again)
+              </form> 
+             
+            </div>
+          
+            <form id='AcceptRequestForm' action='accept.php' method='post'>";
+    }
+
 ?>

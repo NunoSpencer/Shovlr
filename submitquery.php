@@ -6,8 +6,13 @@
     when user clicks SUBMIT button, the info from request.html form will be submitted to the database ("requests" table) 
 */
 
+include_once(__DIR__."/Clockwork.php");
+include_once(__DIR__."/ClockworkException.php");
+
 //connect to database
 $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+
+$clockworkAPIkey = 'b524a50d77e6017daf822b93efad9fa553438a53';
 
 $LName = $_REQUEST['LName'];
 $FName = $_REQUEST['FName'];
@@ -35,8 +40,35 @@ $submitQuery = mysqli_query($db_connection, "INSERT INTO requests (LName, FName,
 
 if($submitQuery)
 {
-    echo "Request submitted sucessfully!";
-    //echo $AreaSize;
+    echo "Request submitted sucessfully!<br>";
+    echo "Please take note of your request ID in case you want to cancel your request.<br>";
+    echo "Request ID: ".$RequestID."<br>";
+
+    /*Code for sending the Requester the ID numebr to the phone.
+    try
+		{
+			// Create a Clockwork object using your API key
+			$clockwork = new mediaburst\ClockworkSMS\Clockwork( $clockworkAPIkey );
+
+			// Setup and send a message
+			//$message = array( 'to' => '14016993406', 'message' => 'This is a test message from Shovlr!' ); //test sending sms to my phone works
+			$message = array( 'to' => $Phone, 'message' => 'Hi from Shovlr! <br> ' . $FName . ' ' . $LName . ' your request has been accepted.
+			In case you want to cancel your request please use the request ID :	'. $RequestID);
+			$result = $clockwork->send( $message );
+
+			// Check if the send was successful
+			if($result['success']) 
+			{
+				echo 'A text message has been sent to your phone with your RequestID. <br>';
+			}else 
+			{
+				echo 'Message failed - Error: ' . $result['error_message'];
+			}
+		}catch (mediaburst\ClockworkSMS\ClockworkException $e)
+		{
+			echo 'Exception sending SMS: ' . $e->getMessage();
+		}*/
+
 
 }else
     echo "Failed to querying into database!";

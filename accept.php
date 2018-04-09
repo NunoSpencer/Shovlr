@@ -5,7 +5,7 @@
 	if(isset($_POST['id']))						
 	{
 		$id = $_POST['id'];		//get selected requester's requestID (via ajax acceptscript.js)
-	
+		setcookie("requestID", $id);
 
 		//query to update request status from "pending" to "accepted" on "requests" table 
 		$updateStatQuery = " UPDATE requests SET Stat = 'accepted' WHERE RequestID = '$id' ";
@@ -22,6 +22,7 @@
 			$lname = 	$row['LName']; 
 			$fname = 	$row['FName']; 
 			$phone = 	$row['Phone']; 
+			setcookie("requesterPhoneCookie", $phone);
 			$areasize = $row['AreaSize']; 
 			$plowtruck =$row['PlowTruck']; 
 			$street = 	$row['Street']; 
@@ -75,7 +76,8 @@
 								Your last name:
 								<input type='text' id='shovelerLName' name='shovelerLName' value=''><br>
 								Your contact phone:
-								<input type='text' id='shovelerPhone' name='shovelerPhone' value=''><br>
+								<input type='text' id='shovelerPhone' name='shovelerPhone' value='' 
+								pattern='^(1)(4)(0)(1)(\d{7})$'' title = 'Please Enter a number in the format 1401XXXXXXX'><br>
 								<button class = 'shovelBTN' id='shovelBTN' title='Accept Request'>Let's Shovel !</button>
 							</form>
 							<form id='cancelFrom' action='cancel.php' method='post'>
