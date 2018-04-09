@@ -33,7 +33,7 @@
       <head>
 
       <meta charset='utf-8>
-      <meta name='description' content='Provide Snow Removal Service'>
+      <meta name='description' content='Snow Removal Service'>
       <meta name='author' content='SitePoint'>
 
       <link rel='stylesheet' type='text/css' href='bootstrap.min.css'>
@@ -54,12 +54,7 @@
       <div class='bg'></div>
       <div class='main-title-bar'>
 
-      <h1 id='headertitle' class=''><strong>Provide Snow Removal Service</strong></h1>
-
-      <!-- There are <a href='displayrequests.php' > n</a> pending requests to shovel (click number to view ALL pending requests). <br>
-      <br>
-      Or SEARCH requests... (* denotes required fields) <br>
-      <br>-->
+      <h1 id='headertitle' class=''><strong>Snow Removal Service - Pending Requests</strong></h1>
 
       <form action='searchrequests.php' method='post'>
         *City:
@@ -132,7 +127,14 @@
   
       <form id='AcceptRequestForm' action='accept.php' method='post'>";
     
-      printf("%d pending request(s)!\n", $rowcount);
+      
+      if($rowcount == 0)
+      {
+        echo "There are no pending requests at this time. Try again later.";
+      }else 
+      {
+        printf("Pending request(s): %d \n", $rowcount);
+      }
     //display table headings
     echo "<table border = '1'>";
     echo "<tr> <td>Last Name</td> <td>First Name</td> <td>Area Size</td> <td> PlowTruck </td> <td>Street</td> <td>City</td> <td>ZIP</td> <td>Date</td> <td>Time</td> </tr>";
@@ -157,7 +159,7 @@
     echo"</table>
          </form>
          </body>
-         </html>";
+</html>";
 
 ?>
 
