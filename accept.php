@@ -44,9 +44,12 @@
 
 			echo "RequestID: " . $id. "<br>";
 
-			//echo $phone;  //we dont want shovelers to see requester name.. rather shovelers phone will be sent to requester (via text message) 
+			//echo '<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=$street&key=AIzaSyA4xAv_tVh0Z2kV0J0R6UdDJeznP3ADigE"  allowfullscreen> </iframe>' ;
+			echo '<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' . urlencode($street) . '&key=AIzaSyA4xAv_tVh0Z2kV0J0R6UdDJeznP3ADigE"  allowfullscreen> </iframe>';
 		}
 
+		
+			
 		//update request status from "pending" to "accepted", shoveler inputs his/her info and a text message to requester 
 		if(mysqli_query($db_connection, $updateStatQuery))
 		{
