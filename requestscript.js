@@ -26,6 +26,12 @@ $(document).ready( function(e)
         //alert(price + " " + datepicker + " " + timepicker);
 
 
+        //Puts Phone in correct format ERROR HERE
+        //Phone = Phone.replace(/ /g,"");
+        //Phone = Phone.replace(/-/g,"");
+        //Phone = "1401" + Phone;
+        //alert(Phone);
+
         var MissingData = "";
 
         //alert(AreaSize);
@@ -37,9 +43,12 @@ $(document).ready( function(e)
         if (Street == " ") {MissingData = MissingData + "Street\n";}
         if (City == "") {MissingData = MissingData + "City\n";}
         if (Zip == "") {MissingData = MissingData + "Zip\n";}
+<<<<<<< HEAD
         if(datepicker == "") {MissingData = MissingData + "Date of preferred completion\n";}
         if(timepicker == "") {MissingData = MissingData + "Time of preferred completion\n";}
         if(price == "") {MissingData = MissingData + "Wage per hour\n";}
+=======
+>>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 
         if(MissingData != ""){
             alert("Please fill in the following to contiune: \n\n" + MissingData);

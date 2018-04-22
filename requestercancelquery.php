@@ -3,12 +3,17 @@
 	include_once(__DIR__."/Clockwork.php");
 	include_once(__DIR__."/ClockworkException.php");
 	
+<<<<<<< HEAD
 	$db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
+=======
+	$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+>>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 
 	$clockworkAPIkey = 'b524a50d77e6017daf822b93efad9fa553438a53';
 
 	$id = $_COOKIE['cancelID'];
 
+<<<<<<< HEAD
 	$deletequery = "DELETE FROM requests WHERE RequestID = '$id'";
 	$delete = mysqli_query($db_connection, $deletequery)or die("Failed to query database!");
 
@@ -31,6 +36,17 @@
         {
 		   $phone = $row['shovelerPhone']; 
 			setcookie("cancelPhoneCookie", $phone);
+=======
+	$phonequery = "SELECT * FROM requestsaccepted WHERE acceptID = '$id'";
+	$phoneNum = mysqli_query($db_connection, $phonequery)or die("Failed to query database here!");
+	
+	if($phoneNum)
+	{
+		while($row = mysqli_fetch_assoc($phoneNum))
+        {
+		   $phone = $row['shovelerPhone']; 
+			setcookie("cancelPhoneCookie", $phone); 
+>>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
         }
 
         try
@@ -55,6 +71,7 @@
 				}
 			}catch (mediaburst\ClockworkSMS\ClockworkException $e)
 			{
+<<<<<<< HEAD
 				echo 'Exception sending SMS: ' . $e->getMessage().'<br>';
 			}
 			if($deleteShovlr)
@@ -119,5 +136,22 @@
 			     </form>                               			
 				</body>
 				</html>';
+=======
+				echo 'Exception sending SMS: ' . $e->getMessage();
+			}
+
+
+		$deletequery = "DELETE FROM requests WHERE RequestID = '$id'";
+		$delete = mysqli_query($db_connection, $deletequery)or die("Failed to query database!");
+
+		if($delete)
+		{
+			echo "Your request has been removed from the listings.";
+		}
+		else
+		{
+			echo "Failed to querying into database! o rhere";
+		}
+>>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 	}
 ?>
