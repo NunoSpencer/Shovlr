@@ -1,17 +1,17 @@
 <?php
 	
-	$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
+	$db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
 
 	if(isset($_POST['id']))						
 	{
 		$id = $_POST['id'];		//get selected requester's requestID (via ajax acceptscript.js)
-	
+		setcookie("requestID", $id);
 
 		//query to update request status from "pending" to "accepted" on "requests" table 
 		$updateStatQuery = " UPDATE requests SET Stat = 'accepted' WHERE RequestID = '$id' ";
 
 		//query to retrieve requester's info based on their request id re on "requests" table 
-		$requesterInfoQuery = " SELECT `FName`, `LName` , `Phone`, `AreaSize`, `PlowTruck`, `Street`, `City`, `Zip` FROM `requests` WHERE `RequestID` = '$id' ";
+		$requesterInfoQuery = " SELECT * FROM `requests` WHERE `RequestID` = '$id' ";
 		$requesterInfo = mysqli_query($db_connection, $requesterInfoQuery) ;
 
 		//display info on the request that is being shoveled
@@ -22,11 +22,16 @@
 			$lname = 	$row['LName']; 
 			$fname = 	$row['FName']; 
 			$phone = 	$row['Phone']; 
+			setcookie("requesterPhoneCookie", $phone);
 			$areasize = $row['AreaSize']; 
 			$plowtruck =$row['PlowTruck']; 
 			$street = 	$row['Street']; 
 			$city = 	$row['City']; 
-			$zip = 		$row['Zip']; 
+			$zip = 		$row['Zip'];
+			$doByDate = $row['doByDate'];
+			$doByTime = $row['doByTime'];
+			$price = 	$row['price'];
+
 
 			echo "Name: " . $fname . " " .$lname. "<br>";
 			echo "Address: " . $street . ", " .$city. " RI " .$zip. " <br>";
@@ -41,9 +46,13 @@
 				echo "<br>";
 			}
 
-			echo "RequestID: " . $id. "<br>";
+			echo"Prefered completion date: " .$doByDate."<br>
+					Prefered completion Time: " .$doByTime."<br>
+					Wage per hour: " .$price."<br>";
 
-			//echo $phone;  //we dont want shovelers to see requester name.. rather shovelers phone will be sent to requester (via text message) 
+			echo "RequestID: " . $id. "<br>";
+		
+			echo '<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' . urlencode($street) . '&key=AIzaSyA4xAv_tVh0Z2kV0J0R6UdDJeznP3ADigE"  allowfullscreen> </iframe>';
 		}
 
 		//update request status from "pending" to "accepted", shoveler inputs his/her info and a text message to requester 
@@ -63,25 +72,42 @@
 
 							<script src='shovlrscript.js' type='text/javascript'></script>
 							<script src='cancelButton.js' type='text/javascript'></script>
+
+							<script type='text/javascript' src='timepicker.js'></script>
+  							<link rel='stylesheet' type='text/css' href='timepicker.css' />
 							<title>Shovlr</title>
 						</head>
 
 						<body>
+						<div class = 'text-center'>
 							<h1 id='headertitle' class=''><strong>Include your information and click 'Let's Shovel' button</strong></h1><br> 
-						
-							<form id='AcceptRequestForm' action='acceptshovelquery.php' method='post'>
-								Your first name:
-								<input type='text' id='shovelerFName' name='shovelerFName' value=''><br>
-								Your last name:
-								<input type='text' id='shovelerLName' name='shovelerLName' value=''><br>
-								Your contact phone:
-								<input type='text' id='shovelerPhone' name='shovelerPhone' value=''><br>
-								<button class = 'shovelBTN' id='shovelBTN' title='Accept Request'>Let's Shovel !</button>
-							</form>
-							<form id='cancelFrom' action='cancel.php' method='post'>
-								<button class = 'cancelBTN' id='cancelBTN' title='Cancel Request'>Cancel</button>
-								<input type='hidden' id = 'id' name='id' value='$id'/>
-							</form>
+						</div>
+						<div class = 'form-row'>
+							<div class = 'col-sm-4 my-1'>
+								<form id='AcceptRequestForm' action='acceptshovelquery.php' method='post'>
+								
+									<input type='text' class = 'form-control' id='shovelerFName' name='shovelerFName' value='' placeholder = 'First Name'><br>
+									<input type='text' class = 'form-control' id='shovelerLName' name='shovelerLName' value='' placeholder = 'Last Name'><br>
+									<input type='text' class = 'form-control' id='shovelerPhone' name='shovelerPhone' value='' placeholder = 'Contact Phone Number'
+										pattern='^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$' title = 'Please Enter a phone number in the format XXXXXXXXXX, XXX XXX XXXX, XXX-XXX-XXXX'><br>
+									<input type='text' class = 'form-control' id = 'timepicker' name = 'timepicker' placeholder = 'Arrival Time' 
+									pattern='^(\d){1,2}[:](\d){2}[ap][m]$' title ='Please select a time from the list.'><br>
+
+								
+									<button class ='btn btn-primary' id='shovelBTN' title='Accept Request'>Let's Shovel !</button><br>
+								
+								
+								</form>
+								
+									<form id='cancelFrom' action='cancel.php' method='post'>
+									
+										<button class = 'btn btn-primary' id='cancelBTN' title='Cancel Request'>Cancel</button>
+										<input type='hidden' id = 'id' name='id' value='$id'/>
+									
+									</form>
+								
+							</div>
+						</div>
 						</body>
 					</html>";
 		}

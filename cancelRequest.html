@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+  <meta name="description" content="Cancel Snow Removal Service ">
+  <meta name="author" content="SitePoint">
+
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="custom.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="cancelRequestscript.js" type="text/javascript"></script>
+
+  <style>
+      body {background-color: whitesmoke;}
+      h1   {color: black;}
+      p    {color: red; font-style: italic;}
+  </style>
+
+  <title>Shovlr - Cancel Snow Removal Service in RI</title>
+	
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="text-center">
+  <h1 id="headertitle" class=""><strong>Cancel a Snow Removal Request</strong></h1>
+</div>
+
+<form id="CancelRequestForm" action="cancelquery.php" method="post">
+	<div class = "form-row">
+    <div class = "col-sm-4 col-sm-offset-4">      
+     	<select id="userType" class = "form-control" name="userType">
+        <option value="choice"> -choose a user type- </option>
+        <option value="requester">Requester</option>
+        <option value="shoveler">Shoveler</option>
+      </select><br>
+      <input type="text" id="requestID" class = "form-control" 	name="requestID" value ="" placeholder = "Request ID"><br>
+      
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <button id="cancelRequestButton" class="btn btn-primary btn-block" title=''>Cancel Request</button>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <input type="button" class="btn btn-primary btn-block" onclick="javascript:history.back()"title='go back' value="Home" />
+        </div>    
+      </div>
+     	
+    </div>
+  </div>
+</form>
+</body>
+</html>

@@ -18,18 +18,28 @@ $(document).ready( function(e)
         var Street = StreetNumber.concat(' ', StreetRoute);
         var City = $('#locality').val();
         var Zip = $('#postal_code').val();
+        var datepicker = $('#datepicker').val();
+        var timepicker = $('#timepicker').val();
+        var price = $('#price').val();
+
+        //Puts Phone in correct format ERROR HERE
+        //alert(price + " " + datepicker + " " + timepicker);
+
 
         var MissingData = "";
 
         //alert(AreaSize);
 
-        if (FName == "") {MissingData = MissingData.concat("First Name\n");}
-        if (LName == "") {MissingData = MissingData.concat("Last Name\n");}
-        if (Phone == "") {MissingData = MissingData.concat("Phone\n");}
-        if (AreaSize == "choice") {MissingData = MissingData.concat("Area Size\n");}
-        if (Street == " ") {MissingData = MissingData.concat("Street\n");}
-        if (City == "") {MissingData = MissingData.concat("City\n");}
-        if (Zip == "") {MissingData = MissingData.concat("Zip\n");}
+        if (FName == "") {MissingData = MissingData + "First Name\n";}
+        if (LName == "") {MissingData = MissingData + "Last Name\n";}
+        if (Phone == "1401") {MissingData = MissingData + "Phone\n";}
+        if (AreaSize == "choice") {MissingData = MissingData + "Area Size\n";}
+        if (Street == " ") {MissingData = MissingData + "Street\n";}
+        if (City == "") {MissingData = MissingData + "City\n";}
+        if (Zip == "") {MissingData = MissingData + "Zip\n";}
+        if(datepicker == "") {MissingData = MissingData + "Date of preferred completion\n";}
+        if(timepicker == "") {MissingData = MissingData + "Time of preferred completion\n";}
+        if(price == "") {MissingData = MissingData + "Wage per hour\n";}
 
         if(MissingData != ""){
             alert("Please fill in the following to contiune: \n\n" + MissingData);
@@ -37,11 +47,11 @@ $(document).ready( function(e)
         }  
     });
 
-    $.ajax
+   /* $.ajax
     (
         {
             type: 'POST',
-            data: {LName: LName, FName: FName, Phone: Phone, AreaSize: AreaSize, PlowTruck: PlowTruck, Street: Street, City: locality, Zip: postal_code},
+            data: {LName: LName, FName: FName, Phone: ("1401".concat('',Phone)), AreaSize: AreaSizeList, PlowTruck: ($('input[type="radio"]').val()), Street: (StreetNumber.concat(' ', StreetRoute)), City: locality, Zip: postal_code},
             url : "submitquery.php",
             success: function(result)
             {
@@ -50,7 +60,7 @@ $(document).ready( function(e)
             }
 
         }
-    );
+    );*/
 
 
 });

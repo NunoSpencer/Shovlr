@@ -13,9 +13,32 @@ body, html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 .center {
   position: absolute;
   left: 0;
   right: 0;
   margin: auto;  
 }
+
+.left
+{
+  margin-left: 45%;
+}
+
+.centerRequest {
+    margin: 0 auto;
+    width: 80%;
+}
+
+h3
+{
+    color: steelblue;
+    font-style: bold;
+}
+
+p {
+    color: red;
+    font-style: italic;
+}
+

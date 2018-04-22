@@ -1,94 +1,189 @@
 <!doctype html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="Request Snow Removal Service ">
-  <meta name="author" content="SitePoint">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Request Snow Removal Service ">
+    <meta name="author" content="SitePoint">
 
-  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="custom.css">
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="requestscript.js" type="text/javascript"></script>
-  <script src="googlemapsscript.js" type="text/javascript"></script>
-
-  <title>Shovlr - Request Snow Removal Service in RI</title>
-
-</head>
-
-<body>
-  <div class="bg"></div>
-  <div class="main-title-bar">
-    <h1 id="headertitle" class=""><strong>Request Snow Removal Service (fill form)</strong></h1>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="custom.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!--Date picker css-->
     
-    <form id="SubmitRequestForm" action="submitquery.php" method="post">
-        First name:
-        <input type="text" id="FName" name="FName" value=""><br>
-        Last name:
-        <input type="text" id="LName" name="LName" value=""><br>
-        Contact phone:
-        <input type="text" id="Phone" name="Phone" value=""
-        ><br>
-        Size of area to be shoveled (in sq ft):
-        <select id="AreaSizeList" name="AreaSizeList">
-          <option value="choice"> - choose area size (sq. ft)- </option>
-          <option value="<5"> less than 5 </option>
-          <option value="[5-15]"> 5 - 15 </option>
-          <option value="[16-25]"> 16 - 25 </option>
-          <option value="[26-50]"> 26 - 50 </option>
-          <option value="[51-80]"> 51 - 80 </option>
-          <option value="[81-120]"> 81 - 120 </option>
-          <option value="[121-150]"> 121 - 150 </option>
-          <option value=">150"> greater than 150 </option>
-        </select>
-        <br>
-      <div id="locationField">
-      <input id="autocomplete" placeholder="Enter your address"
-             onFocus="geolocate()" type="text"></input>
-<<<<<<< HEAD
+    <style>
+      body {background-color: whitesmoke;}
+      h1   {color: black;}
+      p    {color: red; font-style: italic;}
+    </style>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="requestscript.js" type="text/javascript"></script>
+    <script src="googlemapsscript.js" type="text/javascript"></script>
+    <script src="datepickerscript.js" type="text/javascript"></script> <!--Date picker js-->
+
+    <!--Time Picker-->
+    <script type="text/javascript" src="timepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="timepicker.css" />
+
+    <title>Shovlr - Request Snow Removal Service in RI</title>
+
+  </head>
+
+  <body>    
+    <div class="bg"></div>
+      
+      <div class="text-center">
+        <h1 id="headertitle" ><strong>Request Snow Removal Service (fill form)</strong></h1>
+        
+        <p>NOTICE! All requests are automatically removed from the listings after 2 days from creation date.</p>
+        <!-- <p> Average rate: $20 </p> -->
       </div>
-=======
->>>>>>> 84292b40e1e213225a699187689bf27d3725b214
-    </div>
 
-    <table id="address">
-      <tr>
-        <td class="label">Street address</td>
-        <td class="slimField"><input class="field" id="street_number" name="street_number"
-              disabled="true" readonly></input></td>
-        <td class="wideField" colspan="2"><input class="field" id="route" name="route" 
-              disabled="true" readonly></input></td>
-      </tr>
-      <tr>
-        <td class="label">City</td>
-        <td class="wideField" colspan="3"><input class="field" id="locality" name="locality" 
-              disabled="true" readonly></input></td>
-      </tr>
-      <tr>
-        <td class="label">Zip code</td>
-        <td class="wideField"><input class="field" id="postal_code" name="postal_code" 
-              disabled="true" readonly></input></td>
-      </tr>
-    </table>
-      
-      Plow truck required?
-      <div class="form-group">
-        <label class="radio-inline">
-            <input type="radio" name="PlowTruck" value="no" checked> No
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="PlowTruck" value="yes"> Yes 
-        </label>
-     </div>
-      
-      <button id="submitButton" title='Submit request'>Submit</button>
-      <input type="button" onclick="javascript:history.back()"title='Cancel request' value="Cancel" />
-    </form>
+      <div class="container">
+        <div class="row centered-form">
+          <div class="col-xs-8 col-sm-4 col-md-8 col-sm-offset-2">
+            <div class="panel panel-default">
+            
+              <div class="panel-body">
+                <form id="SubmitRequestForm" action="submitquery.php" method="post" role="form" >
 
-  </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsjpDlj8lZqDvYO5mFnEbggFtcaxy6_P4&libraries=places&callback=initAutocomplete"
-        async defer></script>
-</body>
+                  <div class="row">
+                    
+                    <div class="panel-heading">
+                        <h3 class="panel-title" style="color: steelblue; font-weight: bold">Contact Info</h4>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                      <div class="form-group">
+                        <input type="text" class = "form-control input-sm" id="FName" name="FName" value="" placeholder="First Name">
+                      </div>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <input type="text" class = "form-control input-sm" id="LName" name="LName" value="" placeholder="Last Name">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <input type="text" class = "form-control input-sm"  id="Phone" name="Phone" value="" placeholder= "Phone (E.g 1-XXX-XXX-XXXX)"
+                            pattern="^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$" title = "Please Enter a phone number in the format XXXXXXXXXX, XXX XXX XXXX, XXX-XXX-XXXX">
+                            <!-- pattern="^(\d{3})[- ]?(\d{4})$" This is a more general regex for a phone form XXXXXXX XXX XXXX XXX-XXXX -->  
+                        </div>
+                    </div>  
+                  </div>
+
+                  <!-- <div class="panel-heading">
+                      <h4 class="panel-title">Location Info</h4>
+                  </div> -->
+
+                  <div class="form-group" id="locationField">
+                    <div class="row">
+                        <div class="panel-heading">
+                          <h3 class="panel-title" style="color:steelblue; font-weight: bold">Address Info</h4>
+                        </div>
+                    </div>
+
+                      <input id="autocomplete" class = "form-control input-sm" placeholder="Address" type="text"></input><br>
+                      
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                          <input id="street_number" class = "form-control" name="street_number" placeholder = "Street Number" disabled="true" readonly></input><br>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                          <input class = "form-control" id="route" name="route" placeholder = "Street" disabled="true" readonly></input><br>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                          <input class = "form-control" id="locality" name="locality" placeholder = "City" disabled="true" readonly></input>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                          <input class="form-control" id="postal_code" name="postal_code" placeholder = "Zip" disabled="true" readonly></input>
+                        </div>
+                      </div>
+                  </div>
+
+           
+                    
+                  <div class="row">
+                      <div class="panel-heading">
+                        <h3 class="panel-title" style="color: steelblue; font-weight: bold">Shovel Info</h4>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                      <input type="text" class="form-control" id ="datepicker" name ="datepicker" placeholder = "Date of preferred completion">
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                      <input type="text" class="form-control" id ="timepicker" name ="timepicker" placeholder = "Time of preferred completion">
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <input type="text" class="form-control" id = "price" name = "price" placeholder = "Price for driveway"
+                        pattern="^\d+[.](\d{2})$" title = "Please Enter a price in the format XX.XX"><br>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <label for="Area Size" class="col-lg-2" style="color: steelblue">Area size:</label>
+                    <div class="col-lg-4">
+                      <select id="AreaSizeList" class="form-control" name="AreaSizeList">
+                        <option value="choice"> - choose area size (sq. ft)- </option>
+                        <option value="<5"> less than 5 </option>
+                        <option value="[5-15]"> 5 - 15 </option>
+                        <option value="[16-25]"> 16 - 25 </option>
+                        <option value="[26-50]"> 26 - 50 </option>
+                        <option value="[51-80]"> 51 - 80 </option>
+                        <option value="[81-120]"> 81 - 120 </option>
+                        <option value="[121-150]"> 121 - 150 </option>
+                        <option value=">150"> greater than 150 </option>
+                      </select>
+                    </div>
+                    
+                    <div class="col-lg-4" >
+                      <label for="plow" class="col-lg-6" style="color: steelblue">Plow truck?</label>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="radio" class="form-check-input" name="PlowTruck" value="no" checked> No
+                        </label>
+                        <label class="form-check-label">
+                          <input type="radio" class="form-check-input" name="PlowTruck" value="yes"> Yes 
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12"> <br></div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                      <button id="submitButton" class="btn btn-primary btn-block"  title='Submit request'>Submit</button>
+                    </div>
+                    
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                      <input type="button" class="btn btn-primary btn-block" onclick="javascript:history.back()"title='Cancel request' value="Cancel" /> 
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsjpDlj8lZqDvYO5mFnEbggFtcaxy6_P4&libraries=places&callback=initAutocomplete"
+          async defer>
+      </script>
+
+  </body>
 </html>

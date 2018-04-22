@@ -7,9 +7,15 @@
   <title>Shovlr - Snow Removal Service in RI</title>
   <meta name="description" content="Snow Removal Service in RI">
   <meta name="author" content="SitePoint">
+  <meta name="viewport" content-type="width=device-width initial-scale=1">
   
   <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="custom.css">
+
+  <style>
+    body {background-color: whitesmoke;}
+    h1   {color: black;}
+  </style>
   
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -18,13 +24,15 @@
 </head>
 
 <body>
+ 
+
   <div class="bg"></div>
   <div class="text-center">
     <h1 id="headertitle" class=""><strong>Shovlr - Snow Removal Service in RI</strong></h1>
-    
     <div class="btn-group btn-group-lg">
     <input type="button" class="btn btn-primary" title="Request Snow Removal" value="Request" onclick="location.href='request.html';"/>
-    <input type="button" class="btn btn-primary" title="Provide Shovel Service" value="Shovel" onclick="location.href='shovel.html';"/>
+    <input type="button" class="btn btn-primary" title="Provide Shovel Service" value="Shovel" onclick="location.href='displayrequests.php';"/>
+    <input type="button" class="btn btn-primary" title="Cancel Service" value="Cancel a Request" onclick="location.href='cancelRequest.html';"/>
     </div>
   </div>
   
