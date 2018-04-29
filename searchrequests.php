@@ -17,15 +17,11 @@
     if ($_SERVER["REQUEST_METHOD"]=="POST")
     {
         //connect to database
-        $db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
+        $db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
         //deletes every two days not based on time
         //$deleteQuery = "DELETE FROM requests WHERE RequestDate < (CURDATE() - INTERVAL 2 DAY)";
         //mysqli_query($db_connection, $deleteQuery) or die("Failed to querying into database for delete!");
-
-        //delete
-        $deleteQuery = "DELETE FROM requests WHERE RequestDate < (CURDATE() - INTERVAL 2 DAY)";
-        mysqli_query($db_connection, $deleteQuery) or die("Failed to querying into database for delete!");
 
         //save input info to variables
         
@@ -72,21 +68,12 @@
         }
 
         //SQL queries
-        $queryCity= "SELECT *
-                            FROM requests
-                            WHERE Stat ='pending'
-                            $cityChoice
-                            $plowtruckChoice
-                            $areaSizeChoice";                     
+        $queryCity= "SELECT * FROM requests WHERE Stat ='pending' $cityChoice $plowtruckChoice $areaSizeChoice";                     
 
         //search results for city
         $cityResults = mysqli_query($db_connection, $queryCity);
 
-<<<<<<< HEAD
         if($cityResults) 
-=======
-        if(mysqli_num_rows($cityResults) > 0) 
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
         {
             $rowcount = mysqli_num_rows($cityResults);      //number of results, if any..                                      
 
@@ -98,14 +85,13 @@
             displaySearch($city, $plowtruck, $areaSize, $rowcount);
             
             //diplay table headings 
-<<<<<<< HEAD
             echo "<table class='table table-striped'>";
             //echo "<tr> <td>Last Name</td> <td>First Name</td> <td>Area Size</td> <td> PlowTruck </td> <td>Street</td> <td>City</td> <td>ZIP</td> <td>Date</td> <td>Time</td> <td>Wage Per Hour</td> <td>Do By Date</td> <td>Do By Time</td> <td></td>  </tr>";
             echo "<thead>
                     <tr>
                       <th scope='col'>Last Name</th>
                       <th scope='col'>First Name</th>
-                      <th scope='col'>Area Size</th>
+                      <th scope='col'>Area Size (sq.ft)</th>
                       <th scope='col'>Plow Truck</th>
                       <th scope='col'>Street</th>
                       <th scope='col'>City</th>
@@ -118,15 +104,10 @@
                       <th scope='col'></th>
                     </tr>
                   </thead>";
-=======
-            echo "<table border = '1'>";
-            echo "<tr> <td> Last Name </td> <td> First Name </td> <td> Area Size </td> <td> PlowTruck </td> <td> Street </td> <td> City </td> <td> ZIP </td> <td> Date </td> <td> Time </td><td> </td></tr>";
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 
             //display results on the table
             while($row=mysqli_fetch_array($cityResults))
             {
-<<<<<<< HEAD
                 echo "<tbody><tr> <td>{$row ['LName']}    </td> 
                        <td>{$row ['FName']}    </td>  
                        <td>{$row ['AreaSize']} </td> 
@@ -141,18 +122,6 @@
                        <td>{$row ['doByTime']}     </td>
                        <td><button class='btn btn-primary' name='id' title='Accept snow removal request' value='".$row["RequestID"]."'>Accept</button></td>
                     </tr></tbody>"; 
-=======
-                echo "<tr>  <td>{$row ['LName']}    </td> 
-                            <td>{$row ['FName']}    </td>  
-                            <td>{$row ['AreaSize']} </td>
-                            <td>{$row ['PlowTruck']} </td>  
-                            <td>{$row ['Street']}   </td> 
-                            <td>{$row ['City']}     </td> 
-                            <td>{$row ['Zip']}      </td> 
-                            <td>{$row ['RequestDate']}     </td>
-                            <td>{$row ['RequestTime']}     </td>
-                            <td><button class='acceptButton' name = 'id' value='".$row["RequestID"]."'>Accept</button></td></tr>";
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
             }
 
             echo"</table>
@@ -160,21 +129,11 @@
                  </body>
                  </html>";
 
-<<<<<<< HEAD
-=======
-        }else /*if(!(mysqli_num_rows($cityResults)))    */                     //else if no results at all
-        {
-            $rowcount = mysqli_num_rows($cityResults); 
-            displaySearch($city, $plowtruck, $areaSize, $rowcount);
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
         }
             
     }        
     
-<<<<<<< HEAD
     //message displaying what the user searched for and the the results
-=======
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
     function displaySearch($city, $plowtruck, $areaSize, $rowcount)
     {
       if($city != "" || $plowtruck != "choice" || $areaSize != "choice")
@@ -184,43 +143,80 @@
           $city = " found for ".$city;
           }
               
-        if($plowtruck != "choice"){
-          if($plowtruck == "no"){
+        if($plowtruck != "choice")
+        {
+          if($plowtruck == "no")
+          {
             $plowtruck = " not requiring a plow truck";
-          }else{
+          }else
+          {
             $plowtruck = " requiring a plowtruck";
           }
-          }else{
-            $plowtruck = "";
-          }
-
-          if($areaSize != "choice"){
-            $areaSize = " with the area size ".$areaSize;
-          }else{
-            $areaSize = "";
-          }
-            
-          printf("%d pending request(s)%s%s%s!\n", $rowcount, $city, $plowtruck, $areaSize);
+        }else
+        {
+          $plowtruck = "";
         }
+
+        if($areaSize != "choice")
+        {
+          $areaSize = " with the area size ".$areaSize;
+        }else
+        {
+          $areaSize = "";
+        }
+        
+        echo "<div class='container'>
+              <div class='row'>
+                <div class='col-xs-8 col-sm-4 col-md-8 col-sm-offset-2'>
+                  <div class='panel panel-default'>
+                    <div class='panel-body'>
+                      <div class='text-center'>";
+                      printf("%d pending request(s)%s%s%s\n", $rowcount, $city, $plowtruck, $areaSize);
+            echo"  </div>
+                  </div>
+                </div>
+              <div/>
+            </div>
+          </div>";
+
+      }
         else{
-<<<<<<< HEAD
 
           if($rowcount == 0)
            {
-            printf ("There are no pending requests at this time. Try again later.");
-           }else{
-            printf("%d pending request(s)!\n", $rowcount);
-            }
+            echo "<div class='container'>
+                    <div class='row'>
+                      <div class='col-xs-8 col-sm-8 col-md-8 col-sm-offset-2'>
+                        <div class='panel panel-default'>
+                          <div class='panel-body'>
+                            <div class='text-center'>
+                              <h5>There are no pending requests at this time. Try again later.</h5>
+                            </div>
+                          </div>
+                        </div>
+                      <div/>
+                    </div>
+                  </div>";
+           }else
+           {
+            echo "<div class='container'>
+            <div class='row'>
+              <div class='col-xs-8 col-sm-4 col-md-8 col-sm-offset-2'>
+                <div class='panel panel-default'>
+                  <div class='panel-body'>
+                    <div class='text-center'>";
+                    printf("%d pending request(s)!\n", $rowcount);
+            echo"     </div>
+                    </div>
+                  </div>
+                <div/>
+              </div>
+            </div>";
+          }
         }
     }
 
     //html page
-=======
-          printf("%d pending request(s)!\n", $rowcount);
-        }
-    }
-
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
     function displayHTML()
     {
        echo "
@@ -246,7 +242,6 @@
             <body>
                     
               <div class='bg'></div>
-<<<<<<< HEAD
               <div class='text-center'>
 
                 <h1 id='headertitle' class=''><strong>Snow Removal Service - Pending Requests</strong></h1>
@@ -328,80 +323,6 @@
       </form> 
              
             
-=======
-              <div class='main-title-bar'>
-
-              <h1 id='headertitle' class=''><strong>Provide Snow Removal Service</strong></h1>
-              
-              <form action='searchrequests.php' method='post'>
-                City:
-                <select id='City' name='City' >
-                  <option value=''>- choose a city -</option>
-                  <option value='Barrington'> Barrington </option>
-                  <option value='Bristol'> Bristol </option>
-                  <option value='Burriville'> Burriville </option>
-                  <option value='Central Falls'> Central Falls </option>
-                  <option value='Charlestown'> Charlestown </option>
-                  <option value='Coventry'> Coventry </option>
-                  <option value='Cranston'> Cranston </option>
-                  <option value='Cumberland'> Cumberland </option>
-                  <option value='East Greenwich'> East Greenwich </option>
-                  <option value='East Providence'> East Providence </option>
-                  <option value='Exeter'> Exeter </option>
-                  <option value='Foster'> Foster </option>
-                  <option value='Glocester'> Glocester </option>
-                  <option value='Hopkinton'> Hopkinton </option>
-                  <option value='Jamestown'> Jamestown </option>
-                  <option value='Johnston'> Johnston </option>
-                  <option value='Lincoln'> Lincoln </option>
-                  <option value='Little Compton'> Little Compton </option>
-                  <option value='Middletown'> Middletown </option>
-                  <option value='Narragansett'> Narragansett </option>
-                  <option value='Newport'> Newport </option>
-                  <option value='New Shoreham'> New Shoreham </option>
-                  <option value='North Kingstown'> North Kingstown </option>
-                  <option value='North Providence'> North Providence </option>
-                  <option value='North Smithfield'> North Smithfield </option>
-                  <option value='Pawtucket'> Pawtucket </option>
-                  <option value='Providence'> Providence </option>
-                  <option value='Richmond'> Richmond </option>
-                  <option value='Scituate'> Scituate </option>
-                  <option value='Smithfield'> Smithfield </option>
-                  <option value='South Kingstown'> South Kingstown </option>
-                  <option value='Tiverton'> Tiverton </option>
-                  <option value='Warren'> Warren </option>
-                  <option value='Warwick'> Warwick </option>
-                  <option value='Westerly' > Westerly </option>
-                  <option value='West Greenwich'> West Greenwich </option>
-                  <option value='West Warwick'> West Warwick </option>
-                  <option value='Woonsocket'> Woonsocket </option>
-                </select>
-              
-                Area size (in sq ft):
-                <select id='AreaSizeList' name='AreaSizeList'>
-                  <option value='choice'> - choose area size (sq. ft)- </option>
-                  <option value='<5'> less than 5 </option>
-                  <option value='[5-15]'> 5 - 15 </option>
-                  <option value='[16-25]'> 16 - 25 </option>
-                  <option value='[26-50]'> 26 - 50 </option>
-                  <option value='[51-80]'> 51 - 80 </option>
-                  <option value='[81-120]'> 81 - 120 </option>
-                  <option value='[121-150]'> 121 - 150 </option>
-                  <option value='>150'> greater than 150 </option>
-                </select>
-              
-                Plow truck?
-                <select id='PlowTruckList' name='PlowTruckList'>
-                  <option value='choice'> - choose an option - </option>
-                  <option value='no'> no </option>
-                  <option value='yes'> yes </option>
-                </select>
-               
-                <button id='SearchButton' title='Search requests'>Search</button> (Click Search with no fields to see all requests again)
-              </form> 
-             
-            </div>
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
           
             <form id='AcceptRequestForm' action='accept.php' method='post'>";
     }
