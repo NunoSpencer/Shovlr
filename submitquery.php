@@ -10,9 +10,7 @@ include_once(__DIR__."/Clockwork.php");
 include_once(__DIR__."/ClockworkException.php");
 
 //connect to database
-$db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
-
-$clockworkAPIkey = 'b524a50d77e6017daf822b93efad9fa553438a53';
+$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
 $clockworkAPIkey = 'b524a50d77e6017daf822b93efad9fa553438a53';
 
@@ -58,7 +56,6 @@ $submitQuery = mysqli_query($db_connection, "INSERT INTO requests (LName, FName,
 
 if($submitQuery)
 {
-<<<<<<< HEAD
 	
 
 	echo '<!DOCTYPE html>
@@ -85,13 +82,6 @@ if($submitQuery)
     echo "Request ID: ".$RequestID."<br>";
 
     /*Code for sending the Requester the ID numebr to the phone.*/
-=======
-    echo "Request submitted sucessfully!<br>";
-    echo "Please take note of your request ID in case you want to cancel your request.<br>";
-    echo "Request ID: ".$RequestID."<br>";
-
-    /*Code for sending the Requester the ID numebr to the phone.
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
     try
 		{
 			// Create a Clockwork object using your API key
@@ -99,13 +89,8 @@ if($submitQuery)
 
 			// Setup and send a message
 			//$message = array( 'to' => '14016993406', 'message' => 'This is a test message from Shovlr!' ); //test sending sms to my phone works
-<<<<<<< HEAD
 			$message = array( 'to' => $Phone, 'message' => 'Hi from Shovlr! <br> ' . $FName . ' ' . $LName . ' your request for snow removal service has been submitted.
 			To cancel the request, use the request ID :	'. $RequestID);
-=======
-			$message = array( 'to' => $Phone, 'message' => 'Hi from Shovlr! <br> ' . $FName . ' ' . $LName . ' your request has been accepted.
-			In case you want to cancel your request please use the request ID :	'. $RequestID);
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 			$result = $clockwork->send( $message );
 
 			// Check if the send was successful
@@ -119,7 +104,6 @@ if($submitQuery)
 		}catch (mediaburst\ClockworkSMS\ClockworkException $e)
 		{
 			echo 'Exception sending SMS: ' . $e->getMessage();
-<<<<<<< HEAD
 		}
 
 		echo '
@@ -136,9 +120,6 @@ if($submitQuery)
                  </form>
 						</body>
 							</html>';
-=======
-		}*/
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 
 
 }else
