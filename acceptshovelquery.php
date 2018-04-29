@@ -14,11 +14,7 @@
 	include_once(__DIR__."/Clockwork.php");
 	include_once(__DIR__."/ClockworkException.php");
 
-<<<<<<< HEAD
-	$db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
-=======
 	$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 
 	//sms text message API key from https://app5.clockworksms.com/
 	$clockworkAPIkey = 'b524a50d77e6017daf822b93efad9fa553438a53';
@@ -42,13 +38,8 @@
 	$acceptTime = date("g:ia", time());
 
 	//send accept query to db
-<<<<<<< HEAD
 	$submitAcceptQuery = mysqli_query($db_connection, "INSERT INTO requestsaccepted (shovelerFName, shovelerLName, shovelerPhone, acceptID,  acceptDate, acceptTime, shovelStatus, shovelerArrivalTime) VALUES 
 		('$shovelerFName', '$shovelerLName', '$shovelerPhone', '$acceptID',  '$acceptDate', '$acceptTime', 'shovel in process', '$shovelerArrivalTime')");
-=======
-	$submitAcceptQuery = mysqli_query($db_connection, "INSERT INTO requestsaccepted (shovelerFName, shovelerLName, shovelerPhone, acceptID,  acceptDate, acceptTime, shovelStatus) VALUES 
-		('$shovelerFName', '$shovelerLName', '$shovelerPhone', '$acceptID',  '$acceptDate', '$acceptTime', 'shovel in process')");
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 
 	
 	if($submitAcceptQuery)
@@ -57,7 +48,6 @@
 		//echo 'Sent to: ' . $_COOKIE['requesterPhoneCookie'] . '<br>';
 
 		//once the shovler clicks "Let's shovel!" button, a sms text message is sent to requester phone 
-<<<<<<< HEAD
 		echo '<!DOCTYPE html>
 			<html>
 			<head>
@@ -79,8 +69,6 @@
 				        <div class="col-xs-8 col-sm-4 col-md-6 col-sm-offset-3">
 				            <div class="panel panel-default">';
 
-=======
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 		try
 		{
 			// Create a Clockwork object using your API key
@@ -98,26 +86,19 @@
 				echo 'Your name: ' . $shovelerFName . ' ' . $shovelerLName . '<br>' ;
 				echo 'Your phone: ' . $shovelerPhone . '<br>';
 				echo 'Your Accept ID: '.$acceptID.' (Used to cancel the request)<br>';
-<<<<<<< HEAD
 				echo 'Shovelers Arrival Time: '.$shovelerArrivalTime.'<br>';
-=======
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 				echo 'Thank you for using Shovlr! <br>';
-				echo 'SMS ID: ' . $result['id'];
+				// echo 'SMS ID: ' . $result['id'];
 			}else 
 			{
 				echo 'Message failed - Error: ' . $result['error_message'];
-<<<<<<< HEAD
 				
-=======
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 			}
 		}catch (mediaburst\ClockworkSMS\ClockworkException $e)
 		{
 			echo 'Exception sending SMS: ' . $e->getMessage();
 		}
 		
-<<<<<<< HEAD
 		echo '
 		</div>
 			</div>
@@ -134,12 +115,12 @@
 			</body>
 			</html>';
 
-=======
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 	}else
 	{
 		echo "Failed to query accept information into database!";
 	}
+
+	
 
 ?>
 
