@@ -1,6 +1,6 @@
 <?php
 	
-	$db_connection = mysqli_connect('localhost', 'root', 'nopass123', 'shovlrdb');
+	$db_connection = mysqli_connect('localhost', 'root', '', 'shovlrdb');
 
 	if(isset($_POST['id']))						
 	{
@@ -50,17 +50,11 @@
 					Prefered completion Time: " .$doByTime."<br>
 					Wage per hour: " .$price."<br>";
 
-<<<<<<< HEAD
 			echo "RequestID: " . $id. "<br>";
 		
-=======
-			//echo '<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=$street&key=AIzaSyA4xAv_tVh0Z2kV0J0R6UdDJeznP3ADigE"  allowfullscreen> </iframe>' ;
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 			echo '<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' . urlencode($street) . '&key=AIzaSyA4xAv_tVh0Z2kV0J0R6UdDJeznP3ADigE"  allowfullscreen> </iframe>';
 		}
 
-		
-			
 		//update request status from "pending" to "accepted", shoveler inputs his/her info and a text message to requester 
 		if(mysqli_query($db_connection, $updateStatQuery))
 		{
@@ -87,7 +81,6 @@
 						<body>
 						<div class = 'text-center'>
 							<h1 id='headertitle' class=''><strong>Include your information and click 'Let's Shovel' button</strong></h1><br> 
-<<<<<<< HEAD
 						</div>
 						<div class = 'form-row'>
 							<div class = 'col-sm-4 my-1'>
@@ -115,23 +108,6 @@
 								
 							</div>
 						</div>
-=======
-						
-							<form id='AcceptRequestForm' action='acceptshovelquery.php' method='post'>
-								Your first name:
-								<input type='text' id='shovelerFName' name='shovelerFName' value=''><br>
-								Your last name:
-								<input type='text' id='shovelerLName' name='shovelerLName' value=''><br>
-								Your contact phone:
-								<input type='text' id='shovelerPhone' name='shovelerPhone' value='' 
-								pattern='^(1)(4)(0)(1)(\d{7})$'' title = 'Please Enter a number in the format 1401XXXXXXX'><br>
-								<button class = 'shovelBTN' id='shovelBTN' title='Accept Request'>Let's Shovel !</button>
-							</form>
-							<form id='cancelFrom' action='cancel.php' method='post'>
-								<button class = 'cancelBTN' id='cancelBTN' title='Cancel Request'>Cancel</button>
-								<input type='hidden' id = 'id' name='id' value='$id'/>
-							</form>
->>>>>>> b9cfe9374e6497b717a084cafe9d9c0d0abbe6db
 						</body>
 					</html>";
 		}
